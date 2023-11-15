@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-web3",
+  "name": "bounty-dapp",
   "private": false,
   "scripts": {
     "prepare": "husky install",
@@ -38,8 +38,10 @@
     "next-nprogress-bar": "^2.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-query": "^3.39.3",
     "react-redux": "^8.1.3",
     "redux-persist": "^6.0.0",
+    "swiper": "^11.0.4",
     "wagmi": "^1.4.5"
   },
   "devDependencies": {
@@ -57,6 +59,9 @@
     "prettier": "^3.0.3",
     "standard-version": "^9.5.0",
     "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "viem": "^1.0.7"
   },
   "browser": {
     "fs": false,

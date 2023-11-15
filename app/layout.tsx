@@ -1,15 +1,16 @@
 import React from 'react'
 import type { Metadata } from 'next'
 import Providers from './providers'
-import '@fontsource/open-sans/500.css'
-import './lib/styles/global.css'
 import { InitialOverlay, RouteProgressBar, Navbar } from './components'
+import '@fontsource/open-sans/500.css'
+import 'swiper/css'
+import 'swiper/css/effect-cards'
+import './lib/styles/global.css'
 
 const { description, title, applicationName, images } = {
-  title: 'Web3 Template',
+  title: 'Bounty Dapp',
   applicationName: 'Inverter',
-  description:
-    'Easily edit and deploy your own web3 application with this template.',
+  description: 'Create Bounty => View => Submit Claim => Get Verified.',
   images: [
     {
       url: 'InverterNetwork/media/main/inverter-dark-banner.png',
