@@ -6,7 +6,6 @@ export default createMultiStyleConfigHelpers(
 ).defineMultiStyleConfig({
   baseStyle: {
     container: {
-      width: 'max-content',
       backgroundColor: 'light.primary.200',
       _dark: {
         backgroundColor: 'dark.primary.900',

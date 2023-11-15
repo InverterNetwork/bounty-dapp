@@ -9,19 +9,18 @@ import {
 import { useQuery } from 'react-query'
 import { PublicClient, usePublicClient } from 'wagmi'
 
-const orchestratorAddress = process.env.NEXT_PUBLIC_ORCHESTRATOR_ADDRESS as
-  | `0x${string}`
-  | undefined
+const defaultOrchestratorAddress = process.env
+  .NEXT_PUBLIC_ORCHESTRATOR_ADDRESS as `0x${string}` | undefined
 
-export function useWorkflowConfig() {
+export function useWorkflowConfig(
+  orchestratorAddress = defaultOrchestratorAddress
+) {
   const publicClient = usePublicClient()
 
   const init = async (
     publicClient: PublicClient,
-    orchestratorAddress: `0x${string}` | undefined
+    orchestratorAddress: `0x${string}`
   ) => {
-    if (!publicClient || !orchestratorAddress) return undefined
-
     const orchestratorContract = getOrchestratorContract(
       publicClient,
       orchestratorAddress
@@ -47,7 +46,7 @@ export function useWorkflowConfig() {
       await fundingManagerContract.read.token()
     )
 
-    const ERC20Contract = await getERC20Contract(publicClient, ERC20Address)
+    const ERC20Contract = getERC20Contract(publicClient, ERC20Address)
 
     const bountyManagerContract = getBountyManagerContract(
       publicClient,
@@ -67,8 +66,11 @@ export function useWorkflowConfig() {
   }
 
   const workflowConfig = useQuery(
-    ['workflowConfig', orchestratorAddress, publicClient],
-    async () => await init(publicClient, orchestratorAddress)
+    ['workflowConfig', orchestratorAddress, !!publicClient],
+    async () => await init(publicClient, orchestratorAddress!),
+    {
+      enabled: !!publicClient && !!orchestratorAddress,
+    }
   )
 
   return workflowConfig

@@ -20,8 +20,7 @@ body {
 .navbar {
   grid-row: 1;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   padding: 12px 32px 12px 32px;
   background-color: inherit;
 }
