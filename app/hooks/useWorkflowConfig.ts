@@ -9,7 +9,9 @@ import {
 import { useQuery } from 'react-query'
 import { PublicClient, usePublicClient } from 'wagmi'
 
-const orchestratorAddress = '0x0A7c8C0EB1afAb6CBaD4bb2d4c738acFF047814A'
+const orchestratorAddress = process.env.NEXT_PUBLIC_ORCHESTRATOR_ADDRESS as
+  | `0x${string}`
+  | undefined
 
 export function useWorkflowConfig() {
   const publicClient = usePublicClient()
@@ -45,7 +47,7 @@ export function useWorkflowConfig() {
       await fundingManagerContract.read.token()
     )
 
-    const ERC20Contract = getERC20Contract(publicClient, ERC20Address)
+    const ERC20Contract = await getERC20Contract(publicClient, ERC20Address)
 
     const bountyManagerContract = getBountyManagerContract(
       publicClient,
